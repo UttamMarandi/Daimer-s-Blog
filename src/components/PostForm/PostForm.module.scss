@@ -1,0 +1,20 @@
+.formContent {
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 0.8rem;
+  min-height: 6em;
+  border: 2px solid #939191;
+  border-radius: 5px;
+  &:focus {
+    outline: none;
+  }
+}
+.button {
+  background-color: #4948a7;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  padding: 10px 40px;
+  border: none;
+  outline: none;
+}
