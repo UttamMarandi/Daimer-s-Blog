@@ -12,9 +12,25 @@ export default function Home({ posts: defaultPosts }) {
   //posts rename to default posts
   // const { user, logIn, logOut } = Auth();
   // console.log("user", user);
-  console.log("posts", posts);
 
   const [posts, updatePosts] = useState(defaultPosts);
+
+  async function handleOnSubmit(data, e) {
+    e.preventDefault();
+    console.log("data", data);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    const responseGet = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
+    );
+    const { posts } = await responseGet.json();
+    updatePosts(posts);
+  }
 
   return (
     <div className={styles.container}>
@@ -60,7 +76,7 @@ export default function Home({ posts: defaultPosts }) {
             </li>
           ))}
         </ul>
-        <PostForm />
+        <PostForm onSubmit={handleOnSubmit} />
         {/* {user && <></>} */}
       </main>
     </div>
@@ -71,7 +87,6 @@ export async function getStaticProps() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/posts`
   );
-
   const { posts } = await response.json();
   return {
     props: {
