@@ -48,7 +48,7 @@ export default async (req, res) => {
 
     console.log("response", response);
 
-    res.status(200).json({ response }); //201 means created
+    res.status(201).json({ response }); //201 means created
     return;
   }
 };

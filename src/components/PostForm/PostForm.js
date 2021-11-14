@@ -10,6 +10,7 @@ const PostForm = ({ onSubmit }) => {
     fields.forEach((field) => {
       if (!field.name) return;
       data[field.name] = field.value; //set data.content to field.value , field.name === content
+      field.value = "";
     });
     if (typeof onSubmit === "function") {
       onSubmit(data, e);

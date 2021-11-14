@@ -15,6 +15,10 @@ export default function Home({ posts: defaultPosts }) {
 
   const [posts, updatePosts] = useState(defaultPosts);
 
+  const postsSorted = posts.sort(function (a, b) {
+    return new Date(b.date) - new Date(a.date);
+  });
+
   async function handleOnSubmit(data, e) {
     e.preventDefault();
     console.log("data", data);
@@ -64,7 +68,7 @@ export default function Home({ posts: defaultPosts }) {
         </div>
         <h1 className={styles.title}>Daimer's Posts</h1>
         <ul className={styles.posts}>
-          {posts.map((post) => (
+          {postsSorted.map((post) => (
             <li key={post.id}>
               <Post
                 content={post.content}
