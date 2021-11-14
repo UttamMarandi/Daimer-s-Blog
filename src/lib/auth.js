@@ -9,4 +9,15 @@ export function init(callback) {
 
 export function logIn(callback) {
   netlifyIdentity.open();
+  netlifyIdentity.on("login", (user) => {
+    callback(user);
+  });
+  netlifyIdentity.close();
+}
+
+export function logOut(callback) {
+  netlifyIdentity.logout();
+  netlifyIdentity.on("logout", (user) => {
+    callback();
+  });
 }

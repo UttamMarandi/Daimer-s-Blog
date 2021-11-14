@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { init, logIn as authLogin } from "../lib/auth";
+import { init, logIn as authLogin, logOut as authLogout } from "../lib/auth";
 
 export const AuthContext = createContext();
 
@@ -12,10 +12,17 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   function logIn() {
-    authLogin();
+    authLogin((user) => {
+      setUser(user);
+    });
+  }
+  function logOut() {
+    authLogout(() => {
+      setUser(undefined);
+    });
   }
 
-  const contextValue = { user, logIn };
+  const contextValue = { user, logIn, logOut };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
